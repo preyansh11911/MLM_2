@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">MLM</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_reference_id">Reference ID</string>
+    <string name="lbl_register">Register</string>
+    <string name="lbl_sign_in">Sign In</string>
+    <string name="lbl_forgot_password">Forgot Password?</string>
+    <string name="lbl_first_name">First Name</string>
+    <string name="lbl_last_name">Last Name</string>
+    <string name="lbl_mobile_number">Mobile Number</string>
+    <string name="lbl_adhar_card_number">Adhar Card Number</string>
+    <string name="lbl_email_id">Email Id</string>
+    <string name="lbl_reference_id">Reference Id</string>
+    <string name="empty_reference_id">Reference ID can not be empty</string>
+    <string name="empty_password">Password can not be empty</string>
+    <string name="empty_first_name">First name can not be empty</string>
+    <string name="empty_last_name">Last name can not be empty</string>
+    <string name="empty_mobile_number">Mobile number can not be empty</string>
+    <string name="empty_adhar_card_number">Adhar card number can not be empty</string>
+    <string name="empty_email">E-mail can not be empty</string>
+</resources>
