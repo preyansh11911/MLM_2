@@ -1,8 +1,10 @@
 package com.support.builders.ApiBuilder
 
+import android.support.v7.app.AlertDialog
 import com.example.parth.kotlinpractice_2.support.CoreActivity
 import com.google.gson.GsonBuilder
 import com.support.builders.ApiBuilder.WebServices.ApiNames
+import com.support.kotlin.showProgress
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.SingleObserver
@@ -20,11 +22,13 @@ import java.util.concurrent.TimeUnit
 fun <T> CoreActivity<*, *, *>.callApi(
         apiName: ApiNames,
         singleCallback: SingleCallback,
+        headers: MutableList<Header>? = null,
         api: () -> Observable<T>
 ) = ApiBuilder(
         this,
         apiName,
         singleCallback,
+        headers,
         api
 )/*.apply(builder)*/
 fun setBaseURL(baseURL: String) {
@@ -35,6 +39,7 @@ class ApiBuilder<T>(
         mActivity: CoreActivity<*, *, *>,
         apiName: ApiNames,
         singleCallback: SingleCallback,
+        val headers: MutableList<Header>? = null,
         api: () -> Observable<T>
 ) {
 
@@ -50,8 +55,10 @@ class ApiBuilder<T>(
     }
 
     var observableApi: Observable<T>
+    var progressDialog: AlertDialog
 
     init {
+        progressDialog = mActivity.showProgress()
         val gson = with(GsonBuilder()) {
             setLenient()
             setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ")
@@ -89,6 +96,9 @@ class ApiBuilder<T>(
 
             clientBuilder.addInterceptor { chain ->
                 val requestBuilder: Request.Builder = chain.request().newBuilder()
+                if (headers != null && headers.isNotEmpty())
+                    for (i in 0 until headers.size)
+                        requestBuilder.header(headers[i].key, headers[i].value)
                 chain.proceed(requestBuilder.build())
             }
 
@@ -119,7 +129,10 @@ class ApiBuilder<T>(
             singleCallback: SingleCallback
     ): SingleObserver<T> {
         return object : SingleObserver<T> {
+
             override fun onSuccess(t: T) {
+                if (progressDialog.isShowing)
+                    progressDialog.dismiss()
                 singleCallback.onSuccess(t as Any, apiName)
             }
 
@@ -128,6 +141,8 @@ class ApiBuilder<T>(
             }
 
             override fun onError(e: Throwable) {
+                if (progressDialog.isShowing)
+                    progressDialog.dismiss()
                 singleCallback.onFailure(e, apiName)
             }
 

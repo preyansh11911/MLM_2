@@ -1,12 +1,13 @@
 package com.example.parth.kotlinpractice_2.support
 
+import android.annotation.SuppressLint
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
+import android.provider.Settings
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
@@ -34,27 +35,25 @@ abstract class CoreActivity<T : CoreActivity<T, DB, VM>, DB : ViewDataBinding, V
             if (field == null) field = createViewModel(activity)
             return field
         }
-    //    val viewModel: VM
-//        get() {
-//            if (vm == null) vm = createViewModel(activity)
-//            return vm!!
-//        }
     var coreVM: ActivityViewModel? = null
         get() {
             if (field == null) field = createCoreViewModel()
             return field
         }
-    //    val coreViewModel: ActivityViewModel
-//        get() {
-//            if (coreVM == null) coreVM = createCoreViewModel()
-//            return coreVM!!
-//        }
     var hasNavigationDrawer: Boolean = false
     var compositeDisposable: CompositeDisposable? = null
         get() {
             if (field == null) field = CompositeDisposable()
             return field
         }
+
+    val deviceID: String
+        @SuppressLint("HardwareIds")
+        get() = Settings.Secure.getString(activity.contentResolver, Settings.Secure.ANDROID_ID)
+
+    companion object {
+        var instance: CoreActivity<*, *, *>? = null
+    }
 
     override fun setContentView(childView: View?) {
         val lp = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
@@ -100,6 +99,7 @@ abstract class CoreActivity<T : CoreActivity<T, DB, VM>, DB : ViewDataBinding, V
 
     fun setDefaults(activity: T, layoutRes: Int) {
         this.activity = activity
+        instance = activity
         this.layoutRes = layoutRes
         navigationDrawer()
         if (!hasNavigationDrawer) {

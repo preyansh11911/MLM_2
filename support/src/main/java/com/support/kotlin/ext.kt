@@ -3,8 +3,11 @@ package com.support.kotlin
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -12,6 +15,7 @@ import com.example.parth.kotlinpractice_2.support.AlertDialogBuilder
 import com.example.parth.kotlinpractice_2.support.BaseFragment
 import com.example.parth.kotlinpractice_2.support.BottomNavigationBuilder
 import com.example.parth.kotlinpractice_2.support.CoreActivity
+import com.support.R
 
 fun Context.showAlert(alertDialog: AlertDialogBuilder.() -> Unit) = AlertDialogBuilder(this).apply(alertDialog)
 
@@ -84,8 +88,23 @@ fun Activity.showSoftKeyboard() {
     imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
 }
 
-fun String.showError(mActivity: Activity) {
-    Toast.makeText(mActivity, this, Toast.LENGTH_SHORT).show()
+fun String.showMsg() {
+    Toast.makeText(CoreActivity.instance, this, Toast.LENGTH_SHORT).show()
+}
+
+fun String.showLongMsg() {
+    Toast.makeText(CoreActivity.instance, this, Toast.LENGTH_LONG).show()
+}
+
+fun Context.showProgress(): AlertDialog {
+    var dialog: AlertDialog? = null
+    AlertDialogBuilder(this).apply {
+        setCustomView(R.layout.loader_dialog_layout)
+        show()
+        dialog = this.dialog!!
+        dialog!!.window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+    }
+    return dialog!!
 }
 
 //fun View.snackWithAction(msg: String) {

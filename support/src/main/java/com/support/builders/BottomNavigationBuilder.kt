@@ -68,8 +68,8 @@ class BottomNavigationBuilder(val coreActivity: CoreActivity<*, *, *>) {
         )
 
         val colors = intArrayOf(
-                selectedColorResID.color(coreActivity),
-                defaultColorResID.color(coreActivity)
+                selectedColorResID.color(),
+                defaultColorResID.color()
         )
 
         view.itemIconTintList = ColorStateList(states, colors)

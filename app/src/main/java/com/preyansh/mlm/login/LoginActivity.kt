@@ -27,6 +27,7 @@ class LoginActivity : CoreActivity<LoginActivity, ActivityLoginBinding, LoginVie
     }
 
     override fun workArea(vm: LoginViewModel) {
+        vm.setBaseURL()
         btn_register_login.setOnClickListener(vm.registerClickListener)
         btn_sign_in.setOnClickListener(vm.signInClickListener)
     }

@@ -18,4 +18,8 @@
     <string name="empty_mobile_number">Mobile number can not be empty</string>
     <string name="empty_adhar_card_number">Adhar card number can not be empty</string>
     <string name="empty_email">E-mail can not be empty</string>
+    <string name="base_url">http://stemwordcloud.esy.es/mlm/</string>
+    <string name="msg_login_successful">You have logged in successfully</string>
+    <string name="invalide_user_credentials">Please enter valid login credentials</string>
+    <string name="warning_something_went_wrong">Something went wrong. Please try again later</string>
 </resources>
