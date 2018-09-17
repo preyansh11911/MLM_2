@@ -3,7 +3,6 @@ package com.example.parth.kotlinpractice_2.support
 import android.content.Context
 import android.content.DialogInterface
 import android.support.annotation.LayoutRes
-import android.support.annotation.StringRes
 import android.support.v7.app.AlertDialog
 
 class AlertDialogBuilder(context: Context) {
@@ -16,7 +15,7 @@ class AlertDialogBuilder(context: Context) {
         builder.setCancelable(false)
     }
 
-    fun title(@StringRes title: Int) {
+    fun title(title: String) {
         builder.setTitle(title)
     }
 
@@ -24,15 +23,15 @@ class AlertDialogBuilder(context: Context) {
         builder.setIcon(iconRes)
     }
 
-    fun message(@StringRes msg: Int) {
+    fun message(msg: String) {
         builder.setMessage(msg)
     }
 
-    fun positiveButtonClick(@StringRes s: Int, listener: DialogInterface.() -> Unit) {
+    fun positiveButtonClick(s: String, listener: DialogInterface.() -> Unit) {
         builder.setPositiveButton(s) { dialog, which -> dialog.listener() }
     }
 
-    fun negativeButtonClick(@StringRes s: Int, listener: DialogInterface.() -> Unit) {
+    fun negativeButtonClick(s: String, listener: DialogInterface.() -> Unit) {
         builder.setNegativeButton(s) { dialog, which -> dialog.listener() }
     }
 

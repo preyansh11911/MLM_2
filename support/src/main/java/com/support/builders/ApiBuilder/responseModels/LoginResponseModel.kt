@@ -9,4 +9,6 @@ data class LoginResponseModel(@SerializedName("success")
                               @SerializedName("status")
                               val status: Int = 0,
                               @SerializedName("token")
-                              val token: String = "")
+                              val token: String = "",
+                              @SerializedName("uid")
+                              val uid: String = "")

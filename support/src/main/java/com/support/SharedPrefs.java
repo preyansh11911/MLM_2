@@ -22,8 +22,17 @@ public class SharedPrefs {
         SharedPrefsHelper.getInstance().save(AppPrefStrings.TOKEN, token);
     }
 
+    public static String getUID() {
+        return SharedPrefsHelper.getInstance().get(AppPrefStrings.UID, "");
+    }
+
+    public static void setUID(String uid) {
+        SharedPrefsHelper.getInstance().save(AppPrefStrings.UID, uid);
+    }
+
     public interface AppPrefStrings {
         String IS_LOGGED_IN = "IsLoggedIn";
         String TOKEN = "token";
+        String UID = "uid";
     }
 }

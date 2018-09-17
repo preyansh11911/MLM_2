@@ -24,11 +24,6 @@ class LoginViewModel(val mActivity: LoginActivity) : ActivityViewModel(mActivity
 
     val signInClickListener = OnClickListener {
 
-
-        mActivity.ed_reference_id_login.setText("1111111")
-        mActivity.ed_password_login.setText("admin")
-
-
         if (isValid()) {
             mActivity.callApi(login, this, getHeaders())
             {
@@ -57,16 +52,13 @@ class LoginViewModel(val mActivity: LoginActivity) : ActivityViewModel(mActivity
         return true
     }
 
-    fun setBaseURL() {
-        ApiBuilder.BASE_URL = "http://stemwordcloud.esy.es/mlm/"
-    }
-
     override fun onSuccess(o: Any, apiName: WebServices.ApiNames) {
         val response = o as LoginResponseModel
         Log.e(TAG, "Success =>> " + response.message)
         if (response.success == 1) {
             R.string.msg_login_successful.string().showMsg()
             SharedPrefs.setToken(response.token)
+            SharedPrefs.setUID(response.uid)
             SharedPrefs.setLoginStatus(true)
             mActivity.startActivity<MainActivity>()
             mActivity.finish()

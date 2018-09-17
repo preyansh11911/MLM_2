@@ -16,6 +16,7 @@ import com.support.R
 import com.support.databinding.ActivityCoreBinding
 import com.support.databinding.ActivityDrawerBinding
 import com.support.kotlin.showAlert
+import com.support.kotlin.string
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.activity_drawer.*
 import kotlinx.android.synthetic.main.app_bar_drawer.*
@@ -71,10 +72,10 @@ abstract class CoreActivity<T : CoreActivity<T, DB, VM>, DB : ViewDataBinding, V
         if (isBackEnabled() != null && !isBackEnabled()!!) {
             showAlert {
                 icon(R.drawable.ic_app_exit)
-                title(R.string.alert_title)
-                message(R.string.alert_message)
-                positiveButtonClick(R.string.YES) { super.onBackPressed() }
-                negativeButtonClick(R.string.NO) { }
+                title(R.string.alert_title.string())
+                message(R.string.alert_message.string())
+                positiveButtonClick(R.string.YES.string()) { super.onBackPressed() }
+                negativeButtonClick(R.string.NO.string()) { }
                 makeCancelable()
                 show()
             }

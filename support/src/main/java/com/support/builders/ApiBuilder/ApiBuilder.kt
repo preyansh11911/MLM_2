@@ -31,9 +31,6 @@ fun <T> CoreActivity<*, *, *>.callApi(
         headers,
         api
 )/*.apply(builder)*/
-fun setBaseURL(baseURL: String) {
-    ApiBuilder.BASE_URL = baseURL
-}
 
 class ApiBuilder<T>(
         mActivity: CoreActivity<*, *, *>,
@@ -46,7 +43,7 @@ class ApiBuilder<T>(
     companion object {
         val OKHTTP_TIMEOUT = 30.toLong()
         val TAG = "ApiClient"
-        var BASE_URL = ""
+        var BASE_URL = "http://stemwordcloud.esy.es/mlm/"
         var retrofit: Retrofit? = null
         var webServices: WebServices? = null
             get() {

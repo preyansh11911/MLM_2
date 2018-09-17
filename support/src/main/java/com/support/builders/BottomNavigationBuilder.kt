@@ -13,6 +13,7 @@ import com.support.kotlin.color
 import kotlinx.android.synthetic.main.activity_core.*
 import kotlinx.android.synthetic.main.content_drawer.*
 
+fun CoreActivity<*, *, *>.setUpBottomNavigation(builder: BottomNavigationBuilder.() -> Unit) = BottomNavigationBuilder(this).apply(builder)
 
 class BottomNavigationBuilder(val coreActivity: CoreActivity<*, *, *>) {
 
