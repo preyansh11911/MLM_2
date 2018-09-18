@@ -48,12 +48,9 @@ abstract class CoreActivity<T : CoreActivity<T, DB, VM>, DB : ViewDataBinding, V
             return field
         }
 
-    val deviceID: String
-        @SuppressLint("HardwareIds")
-        get() = Settings.Secure.getString(activity.contentResolver, Settings.Secure.ANDROID_ID)
-
     companion object {
         var instance: CoreActivity<*, *, *>? = null
+        var deviceID: String = ""
     }
 
     override fun setContentView(childView: View?) {
@@ -98,9 +95,11 @@ abstract class CoreActivity<T : CoreActivity<T, DB, VM>, DB : ViewDataBinding, V
         navigationDrawerBinding.includedAppBar!!.navigationDrawerContent!!.container.addView(binding.root, 0, lp)
     }
 
+    @SuppressLint("HardwareIds")
     fun setDefaults(activity: T, layoutRes: Int) {
         this.activity = activity
         instance = activity
+        deviceID = Settings.Secure.getString(activity.contentResolver, Settings.Secure.ANDROID_ID)
         this.layoutRes = layoutRes
         navigationDrawer()
         if (!hasNavigationDrawer) {
@@ -166,7 +165,8 @@ abstract class CoreActivity<T : CoreActivity<T, DB, VM>, DB : ViewDataBinding, V
 
     private fun setDefaultActionBarProperties(actionBarTitle: String, isBackEnabled: Boolean?) {
         setActionBarTitle(actionBarTitle)
-        isBackEnabled?.let { activity.supportActionBar?.setDisplayHomeAsUpEnabled(it)
+        isBackEnabled?.let {
+            activity.supportActionBar?.setDisplayHomeAsUpEnabled(it)
             activity.supportActionBar?.setDisplayShowHomeEnabled(it)
         }
     }

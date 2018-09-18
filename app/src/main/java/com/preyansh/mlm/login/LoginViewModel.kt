@@ -3,6 +3,7 @@ package com.preyansh.mlm.login
 import android.util.Log
 import android.view.View.OnClickListener
 import com.example.parth.kotlinpractice_2.support.ActivityViewModel
+import com.example.parth.kotlinpractice_2.support.CoreActivity
 import com.preyansh.mlm.R
 import com.preyansh.mlm.dashboard.MainActivity
 import com.preyansh.mlm.register.RegisterActivity
@@ -30,7 +31,7 @@ class LoginViewModel(val mActivity: LoginActivity) : ActivityViewModel(mActivity
                 ApiBuilder.webServices!!.login(
                         mActivity.ed_reference_id_login.text.toString(),
                         mActivity.ed_password_login.text.toString(),
-                        mActivity.deviceID
+                        CoreActivity.deviceID
                 )
             }
         }

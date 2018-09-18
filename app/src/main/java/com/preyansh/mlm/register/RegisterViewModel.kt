@@ -1,12 +1,18 @@
 package com.preyansh.mlm.register
 
+import android.content.Intent
 import android.util.Log
 import android.view.View
 import com.example.parth.kotlinpractice_2.support.ActivityViewModel
+import com.example.parth.kotlinpractice_2.support.CoreActivity
 import com.preyansh.mlm.R
+import com.preyansh.mlm.dashboard.MainActivity
+import com.support.SharedPrefs
 import com.support.builders.ApiBuilder.*
 import com.support.builders.ApiBuilder.responseModels.RegistrationResponseModel
+import com.support.kotlin.showLongMsg
 import com.support.kotlin.showMsg
+import com.support.kotlin.startActivity
 import com.support.kotlin.string
 import kotlinx.android.synthetic.main.activity_register.*
 import java.util.*
@@ -27,7 +33,7 @@ class RegisterViewModel(val mActivity: RegisterActivity) : ActivityViewModel(mAc
                         mActivity.ed_email.text.toString(),
                         mActivity.ed_password_registration.text.toString(),
                         mActivity.ed_reference_id_registration.text.toString(),
-                        mActivity.deviceID,
+                        CoreActivity.deviceID,
                         mActivity.ed_mobile_number.text.toString()
                 )
             }
@@ -70,33 +76,20 @@ class RegisterViewModel(val mActivity: RegisterActivity) : ActivityViewModel(mAc
         return true
     }
 
-    private fun callLoginApi() {
-        mActivity.callApi(WebServices.ApiNames.login, this, getHeaders())
-        {
-            ApiBuilder.webServices!!.login(
-                    mActivity.ed_reference_id_registration.text.toString(),
-                    mActivity.ed_password_registration.text.toString(),
-                    mActivity.deviceID
-            )
-        }
-    }
-
     override fun onSuccess(o: Any, apiName: WebServices.ApiNames) {
         val response = o as RegistrationResponseModel
         Log.e(TAG, "Success =>> " + response.message)
         if (response.success == 0) {
-//            R.string.msg_registration_successful.string().showMsg()
-//            SharedPrefs.setLoginStatus(true)
-//            mActivity.startActivity<MainActivity>(Arrays.asList(Intent.FLAG_ACTIVITY_NEW_TASK, Intent.FLAG_ACTIVITY_CLEAR_TASK))
-//            mActivity.finish()
-
-            callLoginApi()
-
+            R.string.msg_registration_successful.string().showMsg()
+            SharedPrefs.setLoginStatus(true)
+            mActivity.startActivity<MainActivity>(Arrays.asList(Intent.FLAG_ACTIVITY_NEW_TASK, Intent.FLAG_ACTIVITY_CLEAR_TASK))
+            mActivity.finish()
         }
     }
 
     override fun onFailure(throwable: Throwable, apiName: WebServices.ApiNames) {
         Log.e(TAG, "Failure =>> " + throwable.localizedMessage)
+        R.string.warning_something_went_wrong.string().showLongMsg()
     }
 
 }

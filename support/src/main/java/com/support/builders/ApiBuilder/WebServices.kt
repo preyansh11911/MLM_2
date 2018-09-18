@@ -1,6 +1,7 @@
 package com.support.builders.ApiBuilder
 
 import com.support.builders.ApiBuilder.responseModels.LoginResponseModel
+import com.support.builders.ApiBuilder.responseModels.LogoutResponseModel
 import com.support.builders.ApiBuilder.responseModels.RegistrationResponseModel
 import com.support.builders.ApiBuilder.responseModels.UserListResponseModel
 import io.reactivex.Observable
@@ -41,7 +42,11 @@ interface WebServices {
     @POST("getuser.php")
     fun getUserList(@Field("uid") uid: String): Observable<UserListResponseModel>
 
+    @FormUrlEncoded
+    @POST("logout.php")
+    fun logout(@Field("deviceid") deviceid: String): Observable<LogoutResponseModel>
+
     enum class ApiNames {
-        sample, movieList, login, registration, userList
+        sample, movieList, login, registration, userList, logout
     }
 }
