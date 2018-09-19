@@ -1,4 +1,4 @@
-package com.example.parth.kotlinpractice_2.support
+package com.support.builders
 
 import android.annotation.SuppressLint
 import android.content.res.ColorStateList
@@ -9,6 +9,7 @@ import android.support.design.internal.BottomNavigationMenuView
 import android.support.design.widget.BottomNavigationView
 import android.util.Log
 import android.view.MenuItem
+import com.example.parth.kotlinpractice_2.support.CoreActivity
 import com.support.kotlin.color
 import kotlinx.android.synthetic.main.activity_core.*
 import kotlinx.android.synthetic.main.content_drawer.*
@@ -82,7 +83,6 @@ class BottomNavigationBuilder(val coreActivity: CoreActivity<*, *, *>) {
      * @param isShifting
      * Pass TRUE/FALSE to enable/disable the shifting mode respectively.
      */
-
     @SuppressLint("RestrictedApi")
     fun shiftModeEnabled(isShifting: Boolean) {
         if (!isShifting) {
@@ -114,6 +114,10 @@ class BottomNavigationBuilder(val coreActivity: CoreActivity<*, *, *>) {
 
     fun selectedItem(@IdRes menuItemID: Int) {
         view.selectedItemId = menuItemID
+    }
+
+    fun setCheckedItem(index: Int) {
+        view.menu.getItem(index).isChecked = true
     }
 }
 

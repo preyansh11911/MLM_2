@@ -3,6 +3,7 @@ package com.preyansh.mlm.dashboard.userList
 import android.support.v7.widget.SearchView
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.MenuItem
 import com.preyansh.mlm.R
 import com.preyansh.mlm.databinding.FragmentUserListBinding
 import com.support.core_utils.CoreFragment_DataBinding
@@ -11,6 +12,7 @@ import com.support.kotlin.showMsg
 class UserListFragment : CoreFragment_DataBinding<UserListFragment, FragmentUserListBinding, UserListViewModel>() {
     override fun workArea() {
         setHasOptionsMenu(true)
+        activity?.invalidateOptionsMenu()
 //        vm?.let {
 //            it.createUsersList(it.view.rec_user_list, R.layout.user_list_single_item)
 //        }
@@ -45,6 +47,18 @@ class UserListFragment : CoreFragment_DataBinding<UserListFragment, FragmentUser
             }
 
         })
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.action_filter -> {
+                "Filter".showMsg()
+                return true
+            }
+            else -> {
+                return false
+            }
+        }
     }
 
 }

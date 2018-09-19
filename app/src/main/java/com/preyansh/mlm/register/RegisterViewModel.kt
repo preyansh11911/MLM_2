@@ -69,6 +69,14 @@ class RegisterViewModel(val mActivity: RegisterActivity) : ActivityViewModel(mAc
             R.string.empty_password.string().showMsg()
             return false
         }
+        if (mActivity.ed_confirm_password_registration.text.isBlank()) {
+            R.string.empty_confirm_password.string().showMsg()
+            return false
+        }
+        if (!mActivity.ed_password_registration.text.toString().equals(mActivity.ed_confirm_password_registration.text.toString())) {
+            R.string.warning_password_mismatch.string().showMsg()
+            return false
+        }
         if (mActivity.ed_reference_id_registration.text.isBlank()) {
             R.string.empty_reference_id.string().showMsg()
             return false
@@ -79,11 +87,14 @@ class RegisterViewModel(val mActivity: RegisterActivity) : ActivityViewModel(mAc
     override fun onSuccess(o: Any, apiName: WebServices.ApiNames) {
         val response = o as RegistrationResponseModel
         Log.e(TAG, "Success =>> " + response.message)
-        if (response.success == 0) {
+        if (response.success == 1) {
             R.string.msg_registration_successful.string().showMsg()
             SharedPrefs.setLoginStatus(true)
+            SharedPrefs.setUID(response.uid)
             mActivity.startActivity<MainActivity>(Arrays.asList(Intent.FLAG_ACTIVITY_NEW_TASK, Intent.FLAG_ACTIVITY_CLEAR_TASK))
             mActivity.finish()
+        } else {
+            R.string.warning_not_registered.string().showMsg()
         }
     }
 

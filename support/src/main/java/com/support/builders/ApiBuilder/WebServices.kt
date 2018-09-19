@@ -1,9 +1,6 @@
 package com.support.builders.ApiBuilder
 
-import com.support.builders.ApiBuilder.responseModels.LoginResponseModel
-import com.support.builders.ApiBuilder.responseModels.LogoutResponseModel
-import com.support.builders.ApiBuilder.responseModels.RegistrationResponseModel
-import com.support.builders.ApiBuilder.responseModels.UserListResponseModel
+import com.support.builders.ApiBuilder.responseModels.*
 import io.reactivex.Observable
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -46,7 +43,22 @@ interface WebServices {
     @POST("logout.php")
     fun logout(@Field("deviceid") deviceid: String): Observable<LogoutResponseModel>
 
+    @FormUrlEncoded
+    @POST("changepassword.php")
+    fun changePassword(
+            @Field("uid") uid: String,
+            @Field("oldpassword") oldpassword: String,
+            @Field("newpassword") newpassword: String
+    ): Observable<ChangePasswordResponseModel>
+
+    @FormUrlEncoded
+    @POST("getuserdetail.php")
+    fun userProfile(
+            @Field("uid") uid: String,
+            @Field("userid") userid: String
+    ): Observable<UserProfileResponseModel>
+
     enum class ApiNames {
-        sample, movieList, login, registration, userList, logout
+        sample, movieList, login, registration, userList, logout, changePassword, userProfile
     }
 }

@@ -2,9 +2,9 @@ package com.preyansh.mlm.dashboard
 
 import android.os.Bundle
 import com.example.parth.kotlinpractice_2.support.CoreActivity
-import com.example.parth.kotlinpractice_2.support.setUpBottomNavigation
 import com.preyansh.mlm.R
 import com.preyansh.mlm.databinding.ActivityMainBinding
+import com.support.builders.setUpBottomNavigation
 
 class MainActivity : CoreActivity<MainActivity,ActivityMainBinding,MainViewModel>() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +30,7 @@ class MainActivity : CoreActivity<MainActivity,ActivityMainBinding,MainViewModel
 
     override fun bottomNavigation() {
         setUpBottomNavigation {
+            vm!!.bottomNavigationBuilder = this
             setMenu(R.menu.user_dashboard_menu)
             setBackgroundColor(R.color.gray)
             setItemColor(R.color.colorPrimary, R.color.darkGray)

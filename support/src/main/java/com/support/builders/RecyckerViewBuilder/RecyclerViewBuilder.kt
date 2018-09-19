@@ -65,7 +65,7 @@ class RecyclerViewBuilder<T : POJOModel>
 
     override fun getItemCount(): Int = mItems.size
 
-    override fun getItemId(position: Int): Long = mItems[position].id
+    override fun getItemId(position: Int): Long = position.toLong()
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is RecyclerViewBuilder<*>.CustomViewHolder) {

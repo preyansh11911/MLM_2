@@ -10,7 +10,7 @@ data class UserListResponseModel(@SerializedName("data")
                                  @SerializedName("count")
                                  val count: Int = 0,
                                  @SerializedName("status")
-                                 val status: Int = 0) {
+                                 val status: Int = 0) : POJOModel() {
 
     data class UserListDataItem(@SerializedName("firstname")
                                 val firstname: String = "",
@@ -19,5 +19,17 @@ data class UserListResponseModel(@SerializedName("data")
                                 @SerializedName("email")
                                 val email: String = "",
                                 @SerializedName("lastname")
-                                val lastname: String = "") : POJOModel()
+                                val lastname: String = "",
+                                @SerializedName("number")
+                                val number: String = "") : POJOModel() {
+
+//        init {
+//            UserListDataItem.id = refid.toLong()
+//            this.id=UserListDataItem.id
+//        }
+//        companion object {
+//            var id: Long = 0
+//        }
+
+    }
 }

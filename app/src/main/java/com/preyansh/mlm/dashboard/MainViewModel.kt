@@ -2,10 +2,12 @@ package com.preyansh.mlm.dashboard
 
 import android.view.MenuItem
 import com.example.parth.kotlinpractice_2.support.ActivityViewModel
+import com.preyansh.mlm.Constants
 import com.preyansh.mlm.R
 import com.preyansh.mlm.dashboard.profile.ProfileFragment
 import com.preyansh.mlm.dashboard.settings.SettingsFragment
 import com.preyansh.mlm.dashboard.userList.UserListFragment
+import com.support.builders.BottomNavigationBuilder
 import com.support.kotlin.startFrag
 
 class MainViewModel(val mActivity: MainActivity) : ActivityViewModel(mActivity) {
@@ -29,14 +31,21 @@ class MainViewModel(val mActivity: MainActivity) : ActivityViewModel(mActivity) 
 //    }
 
 
+    var bottomNavigationBuilder: BottomNavigationBuilder? = null
+
     fun onItemSelectedListener(menuItem: MenuItem) {
         when (menuItem.itemId) {
             R.id.action_home ->
                 mActivity.startFrag(UserListFragment(), "User List", false, R.id.box_dashboard)
             R.id.action_profile ->
-                mActivity.startFrag(ProfileFragment(), "User Profile", false, R.id.box_dashboard)
+                mActivity.startFrag(ProfileFragment.newInstance(Constants.MAIN_ACTIVITY), "User Profile", false, R.id.box_dashboard)
             R.id.action_settings ->
                 mActivity.startFrag(SettingsFragment(), "Change Password", false, R.id.box_dashboard)
         }
     }
+
+    fun setCheckedMenuItem(index: Int) {
+        bottomNavigationBuilder!!.setCheckedItem(index)
+    }
+
 }

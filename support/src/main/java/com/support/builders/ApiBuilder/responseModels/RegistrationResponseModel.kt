@@ -7,4 +7,8 @@ data class RegistrationResponseModel(@SerializedName("success")
                                      @SerializedName("message")
                                      val message: String = "",
                                      @SerializedName("status")
-                                     val status: Int = 0)
+                                     val status: Int = 0,
+                                     @SerializedName("uid")
+                                     val uid: String = "",
+                                     @SerializedName("refid")
+                                     val refid: Int = 0)

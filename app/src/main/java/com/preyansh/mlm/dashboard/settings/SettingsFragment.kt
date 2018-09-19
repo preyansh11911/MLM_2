@@ -8,6 +8,7 @@ import kotlinx.android.synthetic.main.fragment_settings.view.*
 class SettingsFragment : CoreFragment_DataBinding<SettingsFragment, FragmentSettingsBinding, SettingsViewModel>() {
     override fun workArea() {
         vm?.let {
+            it.view.btn_submit.setOnClickListener(it.submitClickListener)
             it.view.btn_logout.setOnClickListener(it.logoutClickListener)
             it.view.btn_delete_ac.setOnClickListener(it.deleteClickListener)
         }

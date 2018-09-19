@@ -3,6 +3,7 @@ package com.support.builders.ApiBuilder
 import android.support.v7.app.AlertDialog
 import com.example.parth.kotlinpractice_2.support.CoreActivity
 import com.google.gson.GsonBuilder
+import com.support.BuildConfig
 import com.support.builders.ApiBuilder.WebServices.ApiNames
 import com.support.kotlin.showProgress
 import io.reactivex.Observable
@@ -14,6 +15,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -99,6 +101,11 @@ class ApiBuilder<T>(
                 chain.proceed(requestBuilder.build())
             }
 
+            if (BuildConfig.DEBUG) {
+                val bodyLoggingInterceptor = HttpLoggingInterceptor()
+                bodyLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+                clientBuilder.addInterceptor(bodyLoggingInterceptor)
+            }
             client = clientBuilder.build()
         }
         return client!!

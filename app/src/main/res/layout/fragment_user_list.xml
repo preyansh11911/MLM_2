@@ -9,7 +9,7 @@
             type="com.preyansh.mlm.dashboard.userList.UserListViewModel" />
     </data>
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".dashboard.userList.UserListFragment">
@@ -23,5 +23,5 @@
             tools:layoutManager="android.support.v7.widget.LinearLayoutManager"
             tools:listitem="@layout/user_list_single_item" />
 
-    </FrameLayout>
+    </LinearLayout>
 </layout>

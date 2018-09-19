@@ -13,6 +13,9 @@
     <string name="lbl_reference_id">Reference Id</string>
     <string name="empty_reference_id">Reference ID can not be empty</string>
     <string name="empty_password">Password can not be empty</string>
+    <string name="empty_confirm_password">Confirm password can not be empty</string>
+    <string name="warning_password_mismatch">Password and Confirm password must match</string>
+    <string name="warning_new_password_mismatch">New password and Confirm password must match</string>
     <string name="empty_first_name">First name can not be empty</string>
     <string name="empty_last_name">Last name can not be empty</string>
     <string name="empty_mobile_number">Mobile number can not be empty</string>
@@ -30,10 +33,15 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hint_current_password">Current Password</string>
+    <string name="hint_full_name">Full Name</string>
     <string name="hint_new_password">New Password</string>
     <string name="hint_confirm_password">Confirm Password</string>
     <string name="lbl_submit">Submit</string>
     <string name="lbl_logout">logout</string>
     <string name="lbl_delete_ac">Delete Account</string>
     <string name="delete_account_alert">Are you sure you want to delete your account?</string>
+    <string name="empty_current_password">Current password can not be empty</string>
+    <string name="empty_new_password">New password can not be empty</string>
+    <string name="change_password_successful_msg">Your password has been changed successfully</string>
+    <string name="warning_not_registered">You have not registered successfully</string>
 </resources>
